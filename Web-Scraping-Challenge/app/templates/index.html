@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Mission to Mars</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+
+<body>
+  <div class="container-fluid">
+    <div class="jumbotron text-center">
+      <h1>Mission to Mars</h1>
+      <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data</a></p>
+    </div>
+
+
+    <div class="container">
+      <!-- Scraped news on mars -->
+      <div class="row">
+        <div class="col-lg-12 mb-6">
+          <h2>Latest Mars News</h2>
+          <h3>{{ marsdata_j.news_p }}</h3>
+          <h3>{{ marsdata_j.news_title }}</h3>
+          <!-- Scraped mars image and facts on mars -->
+          <div class="row">
+            <div class="col-lg-8 mb-6">
+              <h2 class="pt-4 text-center">Featured Mars Image</h2>
+            </div>
+            <div class="col-md-6">
+              <h5 class="text-info"></h5>
+              <a href="{{ marsdata_j.featured_image_url }}">
+                <img class="img-responsive" src="{{marsdata_j.featured_image_url}}" alt="{{marsdata_j.featured_image_url}}"
+                  style="width:100%">
+              </a>
+
+
+            </div>
+            <div class="col-lg-4 mb-6">
+              <h2 class="pt-4 text-center">Mars Facts</h2>
+              <table class="table table-sm table-striped table-bordered table-responsibe-lg">
+                {{ marsdata_j.mars_fact|safe }}
+              </table>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12">
+              <h2 class="pt-4 text-center">Mars Hemispheres</h2>
+            </div>
+            {% for item in marsdata_j.hemisphere_image_urls %}
+            <div class="col-md-6">
+              <h5 class="text-info">{{ item.title }}</h5>
+              <a href="{{ item.img_url }}"">
+            <img class=" img-responsive" src="{{ item.img_url }}" alt={{ item.title }} style="width:100%">
+              </a>
+            </div>
+            {% endfor %}
+          </div>
+          <hr>
+        </div>
+      </div>
+</body>
